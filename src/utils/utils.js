@@ -1,14 +1,14 @@
-export function checkForAccessibility() {
+export const checkForAccessibility = () => {
   let accessibilityIssues = []
   const errorStyle = '3px solid red'
 
-  function rgbSeparator(rgb) {
+  const rgbSeparator = (rgb) => {
     let sep = rgb.indexOf(',') > -1 ? ',' : ' '
     rgb = rgb.substr(4).split(')')[0].split(sep)
     return rgb
   }
 
-  function sRGBToLinear(sRGB) {
+  const sRGBToLinear = (sRGB) => {
     if (sRGB <= 0.04045) {
       return sRGB / 12.92
     } else {
@@ -18,7 +18,7 @@ export function checkForAccessibility() {
     }
   }
 
-  function RGBToLinearRGB(rgb) {
+  const RGBToLinearRGB = (rgb) => {
     // Convert the RGB values from 0-255 to 0-1 range
 
     let [r, g, b] = rgbSeparator(rgb)
@@ -112,6 +112,37 @@ export function checkForAccessibility() {
       para.style.backgroundColor = errorStyle
       accessibilityIssues.push('Contrast ratio inappropriate.')
     }
+
+    // 6. Ensure All Interactive Elements are Focusable
+    // check for button
+    document.querySelectorAll('button').forEach((button) => {
+      if (
+        button.getAttribute('tabIndex') &&
+        button.getAttribute('tabIndex') > 0
+      ) {
+        accessibilityIssues.push('Tab index value should be 0 or less')
+        button.style.backgroundColor = errorStyle
+      }
+      if (!button.getAttribute('tabIndex')) {
+        accessibilityIssues.push(
+          'Ensure All Interactive Elements are Focusable. Please provide tab index to button'
+        )
+        button.style.backgroundColor = errorStyle
+      }
+    })
+    // check for anchor tags
+    document.querySelectorAll('a').forEach((a) => {
+      if (a.getAttribute('tabIndex') && a.getAttribute('tabIndex') > 0) {
+        accessibilityIssues.push('Tab index value should be 0 or less')
+        a.style.backgroundColor = errorStyle
+      }
+      if (!a.getAttribute('tabIndex')) {
+        accessibilityIssues.push(
+          'Ensure All Interactive Elements are Focusable. Please provide tab index to anchor elements'
+        )
+        a.style.backgroundColor = errorStyle
+      }
+    })
   })
 
   return accessibilityIssues.length
