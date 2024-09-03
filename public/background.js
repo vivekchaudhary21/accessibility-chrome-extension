@@ -1,4 +1,5 @@
-chrome.runtime.onInstalled.addListener((details) => {
+/* eslint-disable no-undef */
+chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     title: 'Accessibility guidelines',
     id: 'contextMenu1',

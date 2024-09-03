@@ -1,21 +1,4 @@
-document
-  .getElementById('checkForAccessibility')
-  .addEventListener('click', () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      chrome.scripting.executeScript(
-        {
-          target: { tabId: tabs[0].id },
-          function: checkForAccessibility,
-        },
-        (data) => {
-          const resultDiv = document.getElementById('results')
-          resultDiv.innerHTML = data[0].result
-        }
-      )
-    })
-  })
-
-function checkForAccessibility() {
+export function checkForAccessibility() {
   let accessibilityIssues = []
   const errorStyle = '3px solid red'
 
@@ -60,6 +43,7 @@ function checkForAccessibility() {
   document.querySelectorAll('img').forEach((img) => {
     if (!img.alt) {
       accessibilityIssues.push(`Image missing alt attribute: ${img.src}.`)
+      img.style.border = errorStyle
     }
   })
 
@@ -79,7 +63,7 @@ function checkForAccessibility() {
     accessibilityIssues.push('Page missing Main tag.')
   }
   const footerTag = document.querySelectorAll('footer')
-  if (mainTag === 0) {
+  if (footerTag === 0) {
     accessibilityIssues.push('Page missing footer tag.')
   }
 

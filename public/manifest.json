@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Accessibility Checker",
+  "name": "Accessibility Manager",
   "version": "1.0",
-  "description": "Check how accessible a page is.",
+  "description": "Check how accessible a page is for users.",
   "action": {
-    "default_popup": "popup.html",
-    "default_title": "Accessibility Checker"
+    "default_popup": "index.html",
+    "default_title": "Accessibility Manager"
   },
   "background": {
     "service_worker": "background.js"
