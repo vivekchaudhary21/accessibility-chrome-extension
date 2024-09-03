@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Accessibility Checker",
+  "version": "1.0",
+  "description": "Check how accessible a page is.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Accessibility Checker"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["contextMenus", "search", "activeTab", "scripting"]
+}
