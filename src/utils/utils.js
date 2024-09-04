@@ -55,15 +55,15 @@ export const checkForAccessibility = () => {
 
   // 3. Use of ARIA Landmarks: Appropriately use ARIA landmarks (e.g., <header>, <main>, <footer>) for better navigation.
   const headerTag = document.querySelectorAll('header')
-  if (headerTag === 0) {
+  if (headerTag.length === 0) {
     accessibilityIssues.push('Page missing Header tag.')
   }
   const mainTag = document.querySelectorAll('main')
-  if (mainTag === 0) {
+  if (mainTag.length === 0) {
     accessibilityIssues.push('Page missing Main tag.')
   }
   const footerTag = document.querySelectorAll('footer')
-  if (footerTag === 0) {
+  if (footerTag.length === 0) {
     accessibilityIssues.push('Page missing footer tag.')
   }
 
